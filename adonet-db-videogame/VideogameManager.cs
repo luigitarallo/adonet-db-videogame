@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace adonet_db_videogame
 {
@@ -64,6 +65,41 @@ VALUES (@name, @overview, @release_date, @created_at, @updated_at, @sh_id)";
                 Console.WriteLine(ex.ToString() );
             }
 
+        }
+        public List<Videogame> GetVideogameByString(string searchString)
+        {
+            using SqlConnection connection = new SqlConnection(STRINGA_DI_CONNESSIONE);
+            List<Videogame> videogames = new List<Videogame>();
+            try
+            {
+                connection.Open();
+                string query = "SELECT * FROM videogames WHERE name LIKE @searchstring";
+                using SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add(new SqlParameter("@searchstring", "%" + searchString + "%"));
+                using SqlDataReader reader = command.ExecuteReader();
+                {
+                    while (reader.Read())
+                    {
+                       Videogame videogame = new Videogame(
+                            id: Convert.ToInt32(reader["id"]),
+                            name: (string)reader["name"],
+                            overview: (string)reader["overview"],
+                            releaseDate: (DateTime)reader["release_date"],
+                            createdAt: (DateTime)reader["created_at"],
+                            updatedAt: (DateTime)reader["updated_at"],
+                            softwareHouseId: Convert.ToInt32(reader["software_house_id"])
+                     );
+                     videogames.Add(videogame);
+                    }
+                       
+                }
+                
+            }catch (Exception ex) 
+            {
+                Console.WriteLine("Si è verificato un errore durante la ricerca del videogame");
+                Console.WriteLine(ex.ToString());
+            }
+        return videogames;
         }
     }
 }

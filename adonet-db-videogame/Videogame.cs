@@ -8,7 +8,8 @@ namespace adonet_db_videogame
 {
     public class Videogame
     {
-        public string Name { get; }
+        public int Id { get; set; }
+        public string Name { get; set; }
         public string Overview { get; set; }
         public DateTime ReleaseDate { get; set; }
         public DateTime CreatedAt { get; set; }
@@ -23,6 +24,17 @@ namespace adonet_db_videogame
             ReleaseDate = releaseDate;
             CreatedAt = DateTime.Now;
             UpdatedAt = DateTime.Now;
+            SoftwareHouseId = softwareHouseId;
+        }
+
+        public Videogame(int id, string name, string overview, DateTime releaseDate, DateTime createdAt, DateTime updatedAt, int softwareHouseId)
+        {
+            Id = id;
+            Name = name;
+            Overview = overview;
+            ReleaseDate = releaseDate;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
             SoftwareHouseId = softwareHouseId;
         }
     }

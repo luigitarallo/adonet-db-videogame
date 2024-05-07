@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace adonet_db_videogame
 {
@@ -41,7 +42,28 @@ namespace adonet_db_videogame
                         manager.GetVideogameById(id);
                         break;
                     case 3:
-                        //GetVideogiochiByString();
+                        Console.Write("Inserisci il nome del videogame da cercare: ");
+                        string searchString = Console.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(searchString))
+                        {
+                            List<Videogame> foundGames = manager.GetVideogameByString(searchString);
+                            if (foundGames.Count > 0)
+                            {
+                                Console.WriteLine("Videogiochi trovati:");
+                                foreach (var game in foundGames)
+                                {
+                                    Console.WriteLine($"ID: {game.Id}, Nome: {game.Name}, Descrizione: {game.Overview}");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Nessun videogame trovato con il nome specificato.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Il nome inserito non è valido.");
+                        }
                         break;
                     case 4:
                         //CancellaVideogioco();
