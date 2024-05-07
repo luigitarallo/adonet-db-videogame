@@ -28,7 +28,7 @@ VALUES (@name, @overview, @release_date, @created_at, @updated_at, @sh_id)";
                 command.Parameters.AddWithValue("@created_at", videogame.CreatedAt);
                 command.Parameters.AddWithValue("@updated_at", videogame.UpdatedAt);
                 command.Parameters.AddWithValue("@sh_id", videogame.SoftwareHouseId);
-                command.ExecuteNonQuery();
+                int affectedRows = command.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -100,6 +100,32 @@ VALUES (@name, @overview, @release_date, @created_at, @updated_at, @sh_id)";
                 Console.WriteLine(ex.ToString());
             }
         return videogames;
+        }
+        public void DeleteVideogameById(int id)
+        {
+            using SqlConnection connection = new SqlConnection(STRINGA_DI_CONNESSIONE);
+            try
+            {
+                connection.Open();
+                string query = "DELETE FROM videogames WHERE id = @id";
+                using SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@id", id);
+                int rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    Console.WriteLine("Videogioco eliminato con successo.");
+                }
+                else
+                {
+                    Console.WriteLine("Nessun videogioco trovato con l'ID specificato.");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Si è verificato un errore durante l'eliminazione del videogioco.");
+                Console.WriteLine(ex.ToString());
+            }
         }
     }
 }
