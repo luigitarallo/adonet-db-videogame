@@ -52,12 +52,12 @@ namespace adonet_db_videogame
                                 Console.WriteLine("Videogiochi trovati:");
                                 foreach (var game in foundGames)
                                 {
-                                    Console.WriteLine($"ID: {game.Id}, Nome: {game.Name}, Descrizione: {game.Overview}");
+                                    Console.WriteLine($"ID: {game.Id}, Nome: {game.Name}, Descrizione: {game.Overview}\n");
                                 }
                             }
                             else
                             {
-                                Console.WriteLine("Nessun videogame trovato con il nome specificato.");
+                                Console.WriteLine("Nessun videogame trovato con il nome specificato.\n");
                             }
                         }
                         else

@@ -48,16 +48,20 @@ VALUES (@name, @overview, @release_date, @created_at, @updated_at, @sh_id)";
                 using SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.Add(new SqlParameter("@id", id));
                 using SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        Console.WriteLine($"ID: {reader["id"]}");
-                        Console.WriteLine($"Nome: {reader["name"]}");
-                        Console.WriteLine($"Descrizione: {reader["overview"]}");
-                        Console.WriteLine($"Data di uscita: {reader["release_date"]}");
-                        Console.WriteLine($"Data di creazione: {reader["created_at"]}");
-                        Console.WriteLine($"Data di aggiornamento: {reader["updated_at"]}");
-                        Console.WriteLine($"ID della casa software: {reader["software_house_id"]}");
-                    }
+                if (reader.Read())
+                {
+                    Console.WriteLine($"ID: {reader["id"]}");
+                    Console.WriteLine($"Nome: {reader["name"]}");
+                    Console.WriteLine($"Descrizione: {reader["overview"]}");
+                    Console.WriteLine($"Data di uscita: {reader["release_date"]}");
+                    Console.WriteLine($"Data di creazione: {reader["created_at"]}");
+                    Console.WriteLine($"Data di aggiornamento: {reader["updated_at"]}");
+                    Console.WriteLine($"ID della casa software: {reader["software_house_id"]}");
+                }
+                else
+                {
+                    Console.WriteLine("Nessun videogioco trovato con l'ID specificato.");
+                }
             }
             catch(Exception ex)
             {
