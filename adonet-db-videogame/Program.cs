@@ -8,6 +8,7 @@ namespace adonet_db_videogame
     public const string STRINGA_DI_CONNESSIONE = "Data Source=localhost;Initial Catalog=db_videogame;Integrated Security=True";   
         static void Main(string[] args)
         {
+            VideogameManager manager = new VideogameManager();
             int scelta;
             do
             {
@@ -31,7 +32,7 @@ namespace adonet_db_videogame
                         InsertNewVideogame();
                         break;
                     case 2:
-                        //GetVideogiocoById();
+                        manager.GetVideogiocoById();
                         break;
                     case 3:
                         //GetVideogiochiByString();
