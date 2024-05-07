@@ -37,17 +37,11 @@ VALUES (@name, @overview, @release_date, @created_at, @updated_at, @sh_id)";
 
         }
 
-        public void GetVideogiocoById()
+        public void GetVideogameById(int id)
         {
             using SqlConnection connection = new SqlConnection(STRINGA_DI_CONNESSIONE);
             try
             {
-                Console.Write("Inserisci l'ID del videogioco da cercare: ");
-                if (!int.TryParse(Console.ReadLine(), out int id))
-                {
-                    Console.WriteLine("ID non valido. Riprova.");
-                    return;
-                }
                 connection.Open();
                 string query = "SELECT * FROM videogames WHERE id = @id";
                 using SqlCommand command = new SqlCommand(query, connection);

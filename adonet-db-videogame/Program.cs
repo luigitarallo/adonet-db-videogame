@@ -32,7 +32,13 @@ namespace adonet_db_videogame
                         InsertNewVideogame();
                         break;
                     case 2:
-                        manager.GetVideogiocoById();
+                        Console.Write("Inserisci l'ID del videogioco da cercare: ");
+                        if (!int.TryParse(Console.ReadLine(), out int id))
+                        {
+                            Console.WriteLine("ID deve essere un numero. Riprova.");
+                            continue;
+                        }
+                        manager.GetVideogameById(id);
                         break;
                     case 3:
                         //GetVideogiochiByString();
@@ -66,8 +72,6 @@ namespace adonet_db_videogame
                 return;
             }
 
-            // Per testare, potresti non dover inserire l'ID della casa software manualmente,
-            // puoi impostarlo su un valore fisso o generarlo in qualche modo
             Console.Write("Quale software house ha prodotto il gioco?");
             Console.WriteLine("Seleziona un'opzione");
             Console.WriteLine("1. Nintendo");
